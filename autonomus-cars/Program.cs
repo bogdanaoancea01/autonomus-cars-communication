@@ -13,6 +13,8 @@ class Program
         Car c2 = new Car("Seat", "Ibiza");
         Car c3 = new Car("BMW", "X7");
         Car c4 = new Car("Tesla", "Model S");
+        Car c5 = new Car("Dacia", "Duster");
+        Car c6 = new Car("Skoda", "Fabia");
 
         c1.SetLocation(new Location(0, 0));
         c2.SetLocation(new Location(10, 10));
@@ -23,22 +25,24 @@ class Program
         c2.SetSpeed(120);
         c4.SetSpeed(90);
 
-        c1.AddEvent("Accident detected");
-        c1.AddEvent("Heavy snow");
-        c1.AddEvent("Icy road");
-        c2.AddEvent("Slippery road");
-        c4.AddEvent("Heavy rain");
-
         //add cars on road
         carService.AddCarOnRoad(c1);
         carService.AddCarOnRoad(c2);
         carService.AddCarOnRoad(c3);
         carService.AddCarOnRoad(c4);
+        carService.AddCarOnRoad(c5);
+        carService.AddCarOnRoad(c6);
 
         carService.AddCarOnRoad(c3);
 
-        // handle car events
         Console.WriteLine();
+
+        // handle car events
+        c1.AddEvent("Accident detected");
+        c1.AddEvent("Heavy snow");
+        c1.AddEvent("Icy road");
+        c2.AddEvent("Slippery road");
+        c4.AddEvent("Heavy rain");
 
         Console.Write($"Events in {c1.Manufacturer}-{c1.Model}: ");
         Console.WriteLine(string.Join(", ", c1.CarEvents.Select(e => e.EventDescription)));
@@ -73,14 +77,26 @@ class Program
         Car closestToC4 = carService.ClosestCar(c4);
         Console.WriteLine($"Closest car to {c4.Manufacturer}-{c4.Model} is {closestToC4.Manufacturer}-{closestToC4.Model}");
 
-        double distanceC1C2 = carService.DistanceBetweenCars(c1, c2);
-        Console.WriteLine($"Distance between {c1.Manufacturer}-{c1.Model} and {c2.Manufacturer}-{c2.Model} is: {distanceC1C2} km");
+        Car closestToC5 = carService.ClosestCar(c5);
+        Console.WriteLine($"Closest car to {c5.Manufacturer}-{c5.Model} is {closestToC5.Manufacturer}-{closestToC5.Model}");
         Console.WriteLine();
 
-        
+        double distanceC1C2 = carService.DistanceBetweenCars(c1, c2);
+        Console.WriteLine($"Distance between {c1.Manufacturer}-{c1.Model} and {c2.Manufacturer}-{c2.Model} is: {distanceC1C2} km");
+
+        double distanceC1C5 = carService.DistanceBetweenCars(c1, c5);
+        Console.WriteLine($"Distance between {c1.Manufacturer}-{c1.Model} and {c5.Manufacturer}-{c5.Model} is: {distanceC1C5} km");
+
+        double distanceC5C6 = carService.DistanceBetweenCars(c5, c6);
+        Console.WriteLine($"Distance between {c5.Manufacturer}-{c5.Model} and {c6.Manufacturer}-{c6.Model} is: {distanceC5C6} km");
+        Console.WriteLine();
+
+
         // Send & receive data
         c4.AddEvent("Low tire pressure");
         carService.SendData(c4, closestToC4);
+
+        carService.SendData(c5, c4);
 
     }
 }

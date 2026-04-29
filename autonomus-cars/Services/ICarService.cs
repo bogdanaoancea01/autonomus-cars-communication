@@ -11,7 +11,7 @@ namespace autonomus_cars.Services
         void AddCarOnRoad(Car car);
         double DistanceBetweenCars(Car carA, Car carB);
         Car ClosestCar(Car sourceCar);
-        public void SendData(Car from, Car to);
-        public void ReceiveData(Car receiver, CarDTO receivedData);
+        void SendData(Car from, Car to);
+        void ReceiveData(Car receiver, CarDTO receivedData);
     }
 }

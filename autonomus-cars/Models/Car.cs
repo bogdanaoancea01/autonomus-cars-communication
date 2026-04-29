@@ -5,17 +5,16 @@
         public Guid Id { get; } = Guid.NewGuid();
         public string Manufacturer { get; }
         public string Model { get; }
-        public double Speed { get; private set; }
-        public Location CurrentLocation { get; private set; }
+        public double Speed { get; private set; } = 0;
+        public Location CurrentLocation { get; private set; } = new Location(0, 0);
         public List<CarEvent> CarEvents { get; } = new List<CarEvent>();
 
-        private double _carMileage;
+        private double _carMileage = 0;
 
         public Car(string manufacturer, string model)
         {
             Manufacturer = manufacturer;
             Model = model;
-            _carMileage = 0;
         }
 
 
@@ -26,7 +25,7 @@
 
         public void SetLocation(Location location)
         {
-            CurrentLocation = location;
+            CurrentLocation = location ?? throw new ArgumentNullException("Location should not be null"); 
         }
 
         public void UpdateLocation(Location newLocation)

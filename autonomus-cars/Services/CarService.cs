@@ -12,7 +12,7 @@ namespace autonomus_cars.Services
         {
             if (_carsOnRoad.Any(c => c.Id == car.Id))
             {
-                Console.WriteLine($"Car {car.Manufacturer} - {car.Model} already on road");
+                Console.WriteLine($"Car {car.Manufacturer}-{car.Model} already on road");
                 return;
             }
 
@@ -41,7 +41,7 @@ namespace autonomus_cars.Services
                 CarEvents = from.CarEvents.ToList()
             };
 
-            Console.WriteLine($"Sending data from {from.Id} - {from.Manufacturer} - {from.Model} to {to.Id} - {to.Manufacturer} - {to.Model}");
+            Console.WriteLine($"Sending data from {from.Manufacturer}-{from.Model} to {to.Manufacturer}-{to.Model}");
             ReceiveData(to, senderDTO);
             Console.WriteLine("Data sent successfully.\n");
 
@@ -55,7 +55,10 @@ namespace autonomus_cars.Services
             Console.WriteLine($"Car Model: {receivedData.Model}");
             Console.WriteLine($"Speed: {receivedData.Speed} km/h");
             Console.WriteLine($"Location: ({receivedData.CurrentLocation.X}, {receivedData.CurrentLocation.Y})");
-            Console.WriteLine($"Events in the last 100km: {string.Join(", ", receivedData.CarEvents.Select(e => e.EventDescription))}");
+            var events = receivedData.CarEvents.Any()
+                ? string.Join(", ", receivedData.CarEvents.Select(e => e.EventDescription))
+                : "No events";
+            Console.WriteLine($"Events in the last 100km: {events}");
             Console.WriteLine();
         }
 
