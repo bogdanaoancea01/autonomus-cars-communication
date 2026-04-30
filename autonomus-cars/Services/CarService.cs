@@ -12,7 +12,7 @@ namespace autonomus_cars.Services
         {
             if (_carsOnRoad.Any(c => c.Id == car.Id))
             {
-                Console.WriteLine($"Car {car.Manufacturer}-{car.Model} already on road");
+                Console.WriteLine($"Car {car.Manufacturer}-{car.Model} already on road \n");
                 return;
             }
 

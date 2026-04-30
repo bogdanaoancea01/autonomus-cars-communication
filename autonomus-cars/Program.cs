@@ -16,15 +16,6 @@ class Program
         Car c5 = new Car("Dacia", "Duster");
         Car c6 = new Car("Skoda", "Fabia");
 
-        c1.SetLocation(new Location(0, 0));
-        c2.SetLocation(new Location(10, 10));
-        c3.SetLocation(new Location(500, 500));
-        c4.SetLocation(new Location(2, 1));
-        
-        c1.SetSpeed(100);
-        c2.SetSpeed(120);
-        c4.SetSpeed(90);
-
         //add cars on road
         carService.AddCarOnRoad(c1);
         carService.AddCarOnRoad(c2);
@@ -35,7 +26,14 @@ class Program
 
         carService.AddCarOnRoad(c3);
 
-        Console.WriteLine();
+        c1.SetLocation(new Location(0, 0));
+        c2.SetLocation(new Location(10, 10));
+        c3.SetLocation(new Location(500, 500));
+        c4.SetLocation(new Location(2, 1));
+        
+        c1.SetSpeed(100);
+        c2.SetSpeed(120);
+        c4.SetSpeed(90);
 
         // handle car events
         c1.AddEvent("Accident detected");
